@@ -4,6 +4,7 @@ import random
 import os
 import numpy as np
 from PIL import Image
+from cv2 import resize
 from tensorflow import keras
 
 BASE_URL = "https://maps.googleapis.com"
@@ -50,7 +51,7 @@ def predict_image(model, img_path):
 
     img = Image.open(img_path)
     image_arr = np.array(img, dtype=np.float64)
-    image_arr = image_arr.resize((224,224))
+    image_arr = resize(image_arr, (224,224))
     image_arr = image_arr[:, :, :3]
     image_arr = np.expand_dims(image_arr, axis=0)
 
