@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='predictstyle.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <title> Druma </title>
+</head>
+<body>
+  <header class="showcase">
+    <p>
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <script>
+            var messages = {{ messages | safe }};
+            for (var i=0; i<messages.length; i++) {
+                alert(messages[i]);
+            }
+          </script>
+          {% endif %}
+      {% endwith %}
+    </p>
+    <div class="link">
+      <ul>
+        <li><a href="{{ url_for('predict') }}">Predict</a></li>
+        <img src="{{ url_for('static', filename='logodruma.png') }}" class="cobalogo" alt="Druma">
+      </ul>
+    </div>
+  </header>
+  <div class="upload">
+    <form method="post" action="" enctype="multipart/form-data">
+      <dl>
+          <p>
+              <input type="text" name="Latitude" placeholder="Latitude" class="input_form" required>
+              <input type="text" name="Longitude" placeholder="Longitude" class="input_form" required>
+          </p>
+      </dl>
+      <p>
+          <input type="submit" value="Upload" class="button" onclick="upload()">
+      </p>
+    </form>
+    {% if img_path %}
+	<br>
+	<br>
+    <div>
+      <img src="{{ url_for('static', filename=img_path) }}">
+    </div>
+    {% endif %}
+  </div>
+  <footer class="center bg-dark">
+    <p>Druma 2.0 &copy; 2021</p>
+  </footer>
+</body>
+</html>
