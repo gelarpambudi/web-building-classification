@@ -13,7 +13,7 @@ STREETVIEW_ENDPOINT = "/maps/api/streetview"
 def is_metadata_exist(query_params):
     requests_url = BASE_URL + METADATA_ENDPOINT
     response = requests.get(url=requests_url, params=query_params).json()
-    status = json.dumps(response["status"])
+    status =response["status"]
     if status == "OK":
         return True
     else:
