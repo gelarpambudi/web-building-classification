@@ -14,7 +14,7 @@ def predict():
         API_KEY = app.config["API_KEY"]
         query_params = {
             "location": f"{latitude},{longitude}",
-            "size": "224x224",
+            "size": "800x800",
             "key": API_KEY,
             "return_error_code": "true",
             "source": "outdoor",
