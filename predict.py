@@ -7,7 +7,7 @@ from PIL import Image
 from tensorflow import keras
 
 BASE_URL = "https://maps.googleapis.com"
-METADATA_ENDPOINT = "/maps/api/metadata"
+METADATA_ENDPOINT = "/maps/api/streetview/metadata"
 STREETVIEW_ENDPOINT = "/maps/api/streetview"
 
 def is_metadata_exist(query_params):
