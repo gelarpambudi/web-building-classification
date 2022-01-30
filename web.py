@@ -8,8 +8,8 @@ model = load_model(app.config["MODEL_PATH"])
 @app.route('/', methods=["GET", "POST"])
 def predict():
     if request.method == "POST":
-        longitude = str(request.form['longitude'])
-        latitude = str(request.form['latitude'])
+        longitude = str(request.form['Longitude'])
+        latitude = str(request.form['Latitude'])
         API_KEY = app.config["API_KEY"]
         query_params = {
             "location": f"{latitude},{longitude}",
