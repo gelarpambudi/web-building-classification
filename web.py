@@ -1,6 +1,6 @@
 import tensorflow as tf
 from config import app
-from flask import request, render_template, flash, redirect
+from flask import request, render_template, flash, redirect, session
 from predict import is_metadata_exist, predict_image, get_image, load_model
 
 model = load_model(app.config["MODEL_PATH"])

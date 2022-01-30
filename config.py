@@ -8,3 +8,4 @@ app = Flask(__name__)
 app.config["IMG_FOLDER"] = IMG_FOLDER
 app.config["API_KEY"] = os.environ['GOOGLE_STREETVIEW_KEY']
 app.config["MODEL_PATH"] = MODEL_PATH
+app.secret_key = os.environ['APP_SECRET_KEY']
