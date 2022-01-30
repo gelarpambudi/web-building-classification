@@ -2,7 +2,7 @@ from flask import Flask
 import os
 
 IMG_FOLDER = './static/streetview/'
-MODEL_PATH = './model/VGG16-0.3368-0.8985.H5'
+MODEL_PATH = './model/VGG16-0.3368-0.8985.h5'
 
 app = Flask(__name__)
 app.config["IMG_FOLDER"] = IMG_FOLDER
