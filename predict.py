@@ -23,7 +23,7 @@ def is_metadata_exist(query_params):
 def get_image(query_params, save_dir):
     requests_url = BASE_URL + METADATA_ENDPOINT
     response = requests.get(url=requests_url, params=query_params)
-    image_name = "image_{}".format(random.randint(1,1000000))
+    image_name = "image_{}.jpg".format(random.randint(1,1000000))
     save_path = os.path.join(save_dir, image_name)
     with open(save_path, 'wb') as f:
         f.write(response.content)
