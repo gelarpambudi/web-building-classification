@@ -43,6 +43,18 @@
       </p>
     </form>
     {% if img_path %}
+    <table>
+      <tr>
+          <th><b>Class ID</b></th>
+          <th><b>Building Type</b></th>
+          <th><b>Prediction Probabilites</b></th>
+      </tr>
+      <tr>
+        <td>{{ class_id }}</td>
+        <td> {{ preds_label }}</td>
+        <td> {{ preds_prob }}</td>
+      </tr>
+    </table>
 	<br>
 	<br>
     <div>

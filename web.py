@@ -1,4 +1,5 @@
 import tensorflow as tf
+import os
 from config import app
 from flask import request, render_template, flash, redirect, session
 from predict import is_metadata_exist, predict_image, get_image, load_model
@@ -26,7 +27,7 @@ def predict():
             class_id, label, prob = predict_image(model, image_path)
             return render_template(
                 "predict.html",
-                img_path=image_path,
+                img_path=os.path.relpath(image_path, './static'),
                 class_id=class_id,
                 preds_label=label,
                 preds_prob=prob
