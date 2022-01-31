@@ -37,7 +37,7 @@ def predict():
             else:
                 flash(u'Image does not exists')
                 return redirect(request.url)
-        elif api_options == "OSC":
+        elif api_options == "osc":
             query_params = {
                 "lng": longitude,
                 "lat": latitude,
