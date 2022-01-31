@@ -37,7 +37,7 @@ def get_image_google(query_params, save_dir):
 
 def get_image_osc(query_params, save_dir):
     request_url = OSC_BASE_URL + OSC_STREETVIEW_ENDPOINT
-    response = requests.get(url=request_url, params=query_params)
+    response = requests.get(url=request_url, params=query_params).json()
     api_code = response["status"]["apiCode"]
     if api_code == "600":
         image_url = response["result"]["data"][0]["fileurlLTh"].replace('"','')
