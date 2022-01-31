@@ -7,29 +7,47 @@ from PIL import Image
 from cv2 import resize
 from tensorflow import keras
 
-BASE_URL = "https://maps.googleapis.com"
-METADATA_ENDPOINT = "/maps/api/streetview/metadata"
-STREETVIEW_ENDPOINT = "/maps/api/streetview"
+GOOGLE_BASE_URL = "https://maps.googleapis.com"
+GOOGLE_METADATA_ENDPOINT = "/maps/api/streetview/metadata"
+GOOGLE_STREETVIEW_ENDPOINT = "/maps/api/streetview"
+OSC_BASE_URL = "https://api.openstreetcam.org"
+OSC_STREETVIEW_ENDPOINT = "/2.0/photo/"
 
-def is_metadata_exist(query_params):
-    requests_url = BASE_URL + METADATA_ENDPOINT
+
+def is_image_exist_google(query_params):
+    requests_url = GOOGLE_BASE_URL + GOOGLE_METADATA_ENDPOINT
     response = requests.get(url=requests_url, params=query_params).json()
-    status =response["status"]
+    status = response["status"]
     if status == "OK":
         return True
     else:
         return False
 
 
-def get_image(query_params, save_dir):
-    requests_url = BASE_URL + STREETVIEW_ENDPOINT
+def get_image_google(query_params, save_dir):
+    requests_url = GOOGLE_BASE_URL + GOOGLE_STREETVIEW_ENDPOINT
     response = requests.get(url=requests_url, params=query_params)
     image_name = "image_{}.jpg".format(random.randint(1,1000000))
     save_path = os.path.join(save_dir, image_name)
     with open(save_path, 'wb') as f:
         f.write(response.content)
-
+        
     return save_path
+
+
+def get_image_osc(query_params, save_dir):
+    request_url = OSC_BASE_URL + OSC_STREETVIEW_ENDPOINT
+    response = requests.get(url=request_url, params=query_params)
+    api_code = json.dumps(response["status"]["apiCode"])
+    if api_code == "600":
+        image_url = json.dumps(response["result"]["data"][0]["fileurlLTh"]).replace('"','')
+        image_name = "image_{}.jpg".format(random.randint(1,1000000))
+        image_req = requests.get(url=image_url)
+        save_path = os.path.join(save_dir, image_name)
+        with open(save_path, 'wb') as f:
+            f.write(image_req.content)
+
+        return save_path
 
 
 def load_model(model_path):
