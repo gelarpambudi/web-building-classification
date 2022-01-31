@@ -12,6 +12,7 @@ def predict():
         longitude = str(request.form['Longitude'])
         latitude = str(request.form['Latitude'])
         api_options = str(request.form['api_options'])
+        save_dir = app.config['IMG_FOLDER']
 
         if api_options == "google":
             API_KEY = app.config["API_KEY"]
@@ -24,7 +25,6 @@ def predict():
                 "radius": 10
             }
             if is_image_exist_google(query_params) == True:
-                save_dir = app.config['IMG_FOLDER']
                 image_path = get_image_google(query_params, save_dir)
                 class_id, label, prob = predict_image(model, image_path)
                 return render_template(
@@ -44,7 +44,7 @@ def predict():
                 "projection": "PLANE",
                 "projectionYaw": "0"
             }
-            image_path = get_image_osc(query_params)
+            image_path = get_image_osc(query_params, save_dir)
             if image_path is not None:
                 class_id, label, prob = predict_image(model, image_path)
                 return render_template(
