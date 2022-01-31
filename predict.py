@@ -31,16 +31,16 @@ def get_image_google(query_params, save_dir):
     save_path = os.path.join(save_dir, image_name)
     with open(save_path, 'wb') as f:
         f.write(response.content)
-        
+
     return save_path
 
 
 def get_image_osc(query_params, save_dir):
     request_url = OSC_BASE_URL + OSC_STREETVIEW_ENDPOINT
     response = requests.get(url=request_url, params=query_params)
-    api_code = json.dumps(response["status"]["apiCode"])
+    api_code = response["status"]["apiCode"]
     if api_code == "600":
-        image_url = json.dumps(response["result"]["data"][0]["fileurlLTh"]).replace('"','')
+        image_url = response["result"]["data"][0]["fileurlLTh"].replace('"','')
         image_name = "image_{}.jpg".format(random.randint(1,1000000))
         image_req = requests.get(url=image_url)
         save_path = os.path.join(save_dir, image_name)
