@@ -40,7 +40,9 @@ def get_image_google(query_params, save_dir=None, csv=False):
     else:
         response = requests.get(url=requests_url, params=query_params, stream=True).raw
         image_arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
-        return imdecode(image_arr, IMREAD_COLOR)
+        image_arr = imdecode(image_arr, IMREAD_COLOR)
+        print(type(image_arr))
+        return image_arr
 
 
 def get_image_osc(query_params, save_dir=None, csv=False):
@@ -61,7 +63,8 @@ def get_image_osc(query_params, save_dir=None, csv=False):
         elif csv == True:
             image_req = requests.get(url=image_url, stream=True).raw
             image_arr = np.asarray(bytearray(image_req.read()), dtype=np.uint8)
-            return imdecode(image_arr, IMREAD_COLOR)
+            image_arr = imdecode(image_arr, IMREAD_COLOR)
+            return print(type(image_arr))
 
 
 def load_model(model_path):
@@ -94,6 +97,7 @@ def predict_image(model, img_path=None, img_np=None):
         inv_map = {v: k for k, v in img_classes.items()}  
         label = inv_map[class_id]
 
+        print(class_id, label, highest_prob)
         return class_id, label, highest_prob
 
     elif img_path is None and img_np is not None:
@@ -106,7 +110,8 @@ def predict_image(model, img_path=None, img_np=None):
         class_id = np.where(preds_prob == highest_prob)[1][0]
         inv_map = {v: k for k, v in img_classes.items()}  
         label = inv_map[class_id]
-
+        
+        print(class_id, label, highest_prob)
         return class_id, label, highest_prob
 
 
