@@ -69,7 +69,7 @@ def predict_csv():
             flash(u'No file uploaded')
             return redirect(request.url)
 
-        file = request.files['csv_files']
+        file = request.files['csv_file']
         api_options = str(request.form['api_options'])
         
         if file and allowed_file(file.filename):
