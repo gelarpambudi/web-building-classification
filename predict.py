@@ -110,9 +110,12 @@ def predict_image(model, img_path=None, img_np=None):
         class_id = np.where(preds_prob == highest_prob)[1][0]
         inv_map = {v: k for k, v in img_classes.items()}  
         label = inv_map[class_id]
-        
+
         print(class_id, label, highest_prob)
         return class_id, label, highest_prob
+
+    elif img_path is None and img_np is None:
+        return 'None', 'None', 'None'
 
 
 
