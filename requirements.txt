@@ -3,3 +3,4 @@ tensorflow==2.2.0
 numpy
 pillow
 opencv-python
+pandas
