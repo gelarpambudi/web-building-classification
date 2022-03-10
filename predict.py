@@ -38,7 +38,7 @@ def get_image_google(query_params, save_dir=None, csv=False):
             f.write(response.content)
         return save_path
     else:
-        response = requests.get(url=requests_url, params=query_params, stream=True)
+        response = requests.get(url=requests_url, params=query_params, stream=True).raw
         image_arr = np.array(Image.open(BytesIO(response.content)))
         return image_arr
 
@@ -59,7 +59,7 @@ def get_image_osc(query_params, save_dir=None, csv=False):
 
             return save_path
         elif csv == True:
-            image_req = requests.get(url=image_url, stream=True)
+            image_req = requests.get(url=image_url, stream=True).raw
             image_arr = np.array(Image.open(BytesIO(image_req.content)))
             return image_arr
 
