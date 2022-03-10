@@ -4,7 +4,7 @@ import json
 import random
 import os
 import numpy as np
-import config
+from config import app
 from PIL import Image
 from io import BytesIO
 from cv2 import resize
@@ -109,8 +109,8 @@ def predict_image(model, img_path=None, img_np=None):
 
 def save_csv(csv_file):
     filename = secure_filename(csv_file.filename)
-    csv_file.save(os.path.join(config.config['CSV_FOLDER'], filename))
-    return os.path.join(config.config['CSV_FOLDER'], filename)
+    csv_file.save(os.path.join(app.config['CSV_FOLDER'], filename))
+    return os.path.join(app.config['CSV_FOLDER'], filename)
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_FILES
