@@ -7,7 +7,7 @@ import numpy as np
 from config import app
 from PIL import Image
 from io import BytesIO
-from cv2 import resize
+from cv2 import resize, imdecode, IMREAD_COLOR
 from tensorflow import keras
 from werkzeug.utils import secure_filename
 
@@ -40,7 +40,7 @@ def get_image_google(query_params, save_dir=None, csv=False):
     else:
         response = requests.get(url=requests_url, params=query_params, stream=True).raw
         image_arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
-        return image_arr
+        return imdecode(image_arr, IMREAD_COLOR)
 
 
 def get_image_osc(query_params, save_dir=None, csv=False):
@@ -61,7 +61,7 @@ def get_image_osc(query_params, save_dir=None, csv=False):
         elif csv == True:
             image_req = requests.get(url=image_url, stream=True).raw
             image_arr = np.asarray(bytearray(image_req.read()), dtype=np.uint8)
-            return image_arr
+            return imdecode(image_arr, IMREAD_COLOR)
 
 
 def load_model(model_path):
