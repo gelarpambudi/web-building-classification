@@ -94,6 +94,8 @@ def predict_image(model, img_path=None, img_np=None):
         inv_map = {v: k for k, v in img_classes.items()}  
         label = inv_map[class_id]
 
+        return class_id, label, highest_prob
+
     elif img_path is None and img_np is not None:
         image_arr = resize(img_np, (224,224))
         image_arr = image_arr[:, :, :3]
@@ -105,7 +107,7 @@ def predict_image(model, img_path=None, img_np=None):
         inv_map = {v: k for k, v in img_classes.items()}  
         label = inv_map[class_id]
 
-    return class_id, label, highest_prob
+        return class_id, label, highest_prob
 
 
 
