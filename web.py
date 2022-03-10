@@ -62,7 +62,7 @@ def predict():
         return render_template("predict.html")
 
 
-@app.route('/predict-csv', methods=["GET", "POST"])
+@app.route('/predict_csv', methods=["GET", "POST"])
 def predict_csv():
     if request.method == "POST":
         if 'csv_file' not in request.files:
